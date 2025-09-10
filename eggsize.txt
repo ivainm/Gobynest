@@ -1,0 +1,187 @@
+Picture_ID	Area	Location	Timeseason	Nest_ID	Nest_size_pic	d1.1	d1.2	d2.1	d2.2	d3.1	d3.2	d4.1	d4.2	d5.1	d5.2	scale	eyed
+3	Hitra	Teistholmen 10	Peak season	13	s	162	170	166	171	166	155	145	149	167	142	2071	y
+4	Hitra	Teistholmen 11	Peak season	9	s	160	164	159	162	151	149	162	163	156	142	2071	n
+5	Hitra	Teistholmen 12	Peak season	20	l	135	155	145	145	152	154	152	136	142	151	2071	n
+6	Hitra	Teistholmen 13	Peak season	14	l	163	152	166	167	166	149	158	143	158	154	2071	y
+7	Hitra	Teistholmen 14	Peak season	17	s	149	158	138	142	163	151	155	146	144	155	2071	y
+8	Hitra	Teistholmen 15	Peak season	16	l	154	146	150	143	145	148	148	151	151	145	2071	y
+9	Hitra	Teistholmen 16	Peak season	5	s	151	152	137	157	148	131	148	147	142	162	2071	y
+10	Hitra	Teistholmen 17	Peak season	11	s	159	155	186	134	164	167	165	150	138	169	2071	y
+11	Hitra	Teistholmen 18	Peak season	12	l	142	146	154	153	140	143	128	137	145	138	2071	y
+12	Hitra	Teistholmen 19	Peak season	6	l	155	146	157	152	143	159	164	164	164	136	2071	n
+13	Hitra	Teistholmen 20	Peak season	8	l	163	150	154	139	155	159	150	142	149	130	2071	n
+14	Hitra	Teistholmen 21	Peak season	10	l	145	153	163	155	159	144	154	161	169	155	2071	n
+15	Hitra	Teistholmen 22	Peak season	7	s	149	157	153	162	155	131	158	127	149	160	2071	y
+16	Hitra	Feoya f4-5	Peak season	26	l	164	143	154	166	148	151	143	160	171	152	2071	n
+17	Ringstad	Finnoya	Peak season	20	l	146	133	166	156	152	148	155	152	154	139	2071	n
+18	Ringstad	Finnoya	Peak season	28	l	156	147	153	150	147	147	155	149	147	148	2071	y
+19	Ringstad	Finnoya	Peak season	15	s	171	172	160	184	166	181	174	149	161	158	2071	y
+20	Ringstad	Finnoya	Peak season	19	s	158	141	149	136	155	144	145	131	143	153	2071	y
+21	Ringstad	Finnoya	Peak season	11	s	140	159	159	159	160	151	153	129	151	153	2071	y
+22	Ringstad	Finnoya	Peak season	13	s	158	157	148	149	150	149	151	138	144	131	2071	y
+23	Ringstad	Finnoya	Peak season	26	l	152	154	143	149	154	163	166	163	153	147	2071	n
+24	Ringstad	Finnoya	Peak season	18	l	158	147	152	170	154	155	158	159	141	156	2071	n
+25	Ringstad	Hongvaeret	Peak season	4	l	147	139	145	143	140	130	146	151	140	134	2071	n
+26	Ringstad	Hongvaeret	Peak season	2	l	161	152	150	160	152	158	170	157	167	154	2071	y
+27	Ringstad	Hongvaeret	Peak season	8	l	159	151	152	149	143	158	161	147	145	151	2071	n
+28	Ringstad	Hongvaeret	Peak season	7	s	157	158	164	164	163	154	166	166	165	157	2071	y
+29	Ringstad	Dragan Hammaran	Peak season	3	s	143	147	160	162	172	139	163	156	153	128	2071	y
+30	Ringstad	Dragan Hammaran	Peak season	5	s	166	157	152	145	147	146	147	168	159	151	2071	n
+31	Ringstad	Dragan Hammaran	Peak season	10	l	145	143	162	151	148	166	149	146	148	157	2071	n
+32	Kristineberg	Tjallsoholmen	Peak season	21	s	150	146	135	139	134	150	137	147	149	130	2071	n
+33	Kristineberg	Tjallsoholmen	Peak season	13	s	116	121	131	132	150	132	159	117	133	121	2071	y
+34	Kristineberg	Tjallsoholmen	Peak season	11	s	130	130	128	139	126	128	120	130	138	125	2071	n
+35	Kristineberg	Tjallsoholmen	Peak season	12	l	145	133	136	123	146	140	137	140	145	119	2071	n
+36	Kristineberg	Tjallsoholmen	Peak season	19	s	129	141	132	130	138	122	137	137	145	126	2071	n
+37	Kristineberg	Tjallsoholmen	Peak season	20	l	133	145	130	140	128	129	135	137	140	139	2071	y
+38	Kristineberg	Tjallsoholmen	Peak season	18	l	128	127	133	126	150	132	143	145	139	128	2071	n
+39	Kristineberg	Tjallsoholmen	Peak season	30	l	137	133	125	125	142	136	135	124	149	139	2071	y
+40	Kristineberg	Tjallsoholmen	Peak season	15	s	134	136	131	121	136	129	122	127	133	130	2071	n
+41	Kristineberg	Tjallsoholmen	Peak season	14	l	135	137	124	122	130	114	142	141	125	125	2071	y
+42	Kristineberg	Pittleholmen	Peak season	5	s	132	150	146	137	144	126	137	139	120	145	2071	n
+43	Kristineberg	Pittleholmen	Peak season	8	l	131	111	140	124	144	130	148	124	135	143	2071	n
+44	Kristineberg	Pittleholmen	Peak season	19	s	135	130	150	140	140	145	137	113	121	133	2071	n
+45	Kristineberg	Pittleholmen	Peak season	7	s	137	135	135	130	136	131	132	134	128	133	2071	y
+46	Kristineberg	Pittleholmen	Peak season	18	l	149	141	146	141	148	130	140	135	151	131	2071	n
+47	Kristineberg	Pittleholmen	Peak season	20	l	139	131	128	134	133	147	135	138	142	144	2071	n
+48	Kristineberg	Pittleholmen	Peak season	12	l	147	145	132	131	144	141	139	140	142	136	2071	n
+49	Kristineberg	Pittleholmen	Peak season	1	s	149	144	140	142	126	133	143	116	139	123	2071	y
+50	Hitra	Steinrenningen s-8	Late season	21	s	154	154	147	146	158	135	148	146	152	154	2071	y
+51	Hitra	Steinrenningen s-9	Late season	23	s	153	154	162	150	150	140	148	138	147	148	2071	y
+52	Hitra	Steinrenningen s-10	Late season	27	s	153	147	136	138	136	146	152	146	148	145	2071	y
+53	Hitra	Steinrenningen s-11	Late season	3	s	147	139	148	152	138	151	157	158	150	154	2071	y
+54	Hitra	Steinrenningen s-12	Late season	29	s	152	143	149	154	152	153	150	145	139	132	2071	n
+55	Hitra	Teistholmen 10	Late season	11	s	142	150	149	153	137	148	131	127	149	140	2071	n
+56	Hitra	Teistholmen 11	Late season	13	s	124	131	139	136	137	155	153	160	147	134	2071	n
+57	Hitra	Teistholmen 12	Late season	15	s	146	159	140	140	158	148	142	153	156	150	2071	y
+58	Hitra	Teistholmen 13	Late season	10	l	148	138	138	128	148	148	154	130	138	133	2071	y
+59	Hitra	Teistholmen 14	Late season	17	s	153	162	150	144	148	162	150	136	154	149	2071	n
+60	Hitra	Teistholmen 15	Late season	18	l	150	155	152	138	148	153	151	151	155	154	2071	n
+61	Hitra	Feoya f4-5	Late season	29	s	148	160	157	136	156	138	140	156	141	146	2071	n
+62	Hitra	Feoya f4-6	Late season	10	l	146	140	160	133	156	132	147	132	143	145	2071	n
+63	Hitra	Feoya f4-7	Late season	6	l	146	148	140	143	149	155	157	134	160	145	2071	y
+64	Hitra	Feoya f4-8	Late season	22	l	148	143	153	150	142	148	154	148	145	137	2071	y
+65	Hitra	Feoya f4-9	Late season	28	l	150	148	148	151	149	138	147	139	147	144	2071	y
+66	Hitra	Feoya f4-10	Late season	1	s	141	159	130	151	155	138	157	144	163	137	2071	y
+67	Hitra	Feoya f4-11	Late season	8	l	142	138	152	143	125	146	147	133	153	141	2071	n
+69	Kristineberg	Pittleholmen	Late season	14	l	132	120	135	122	126	116	125	125	127	117	2067	n
+70	Kristineberg	Pittleholmen	Late season	20	l	117	104	114	114	127	109	125	123	115	117	2067	n
+71	Kristineberg	Pittleholmen	Late season	19	s	142	118	131	107	127	129	135	115	136	100	2067	n
+72	Kristineberg	Pittleholmen	Late season	8	l	144	129	141	119	140	134	125	136	136	125	2067	n
+73	Kristineberg	Pittleholmen	Late season	17	s	127	119	143	126	120	112	118	119	129	129	2067	n
+74	Kristineberg	Tjallsoholmen	Late season	12	l	133	115	130	120	136	125	130	114	131	116	2067	n
+75	Kristineberg	Tjallsoholmen	Late season	20	l	129	127	138	127	135	126	137	120	130	130	2067	n
+76	Kristineberg	Tjallsoholmen	Late season	26	l	129	119	130	133	128	125	138	115	143	125	2067	n
+77	Kristineberg	Tjallsoholmen	Late season	25	s	132	121	136	143	125	127	129	123	134	125	2067	y
+78	Kristineberg	Tjallsoholmen	Late season	15	s	136	132	136	127	138	128	137	133	136	119	2067	n
+79	Kristineberg	Tjallsoholmen	Late season	14	l	141	137	136	129	133	126	143	132	133	121	2067	y
+80	Kristineberg	Tjallsoholmen	Late season	29	s	124	109	123	118	128	114	123	127	121	126	2067	n
+81	Ringstad	Dragan Hammaran	Late season	10	l	145	136	149	160	150	138	134	160	136	149	2067	y
+82	Ringstad	Dragan Hammaran	Late season	2	l	144	141	136	147	141	136	155	156	159	159	2067	y
+84	Ringstad	Dragan Hammaran	Late season	3	s	141	139	146	151	143	142	142	141	138	148	2067	y
+85	Ringstad	Finnoya	Late season	16	l	150	145	146	143	139	146	155	143	145	133	2067	y
+86	Ringstad	Finnoya	Late season	24	l	158	143	158	127	146	141	152	142	151	142	2067	n
+87	Ringstad	Finnoya	Late season	18	l	149	140	149	146	135	139	141	140	145	135	2067	n
+88	Ringstad	Finnoya	Late season	30	l	154	158	148	150	153	147	151	156	149	156	2067	y
+89	Ringstad	Hongvaeret	Late season	1	s	143	138	146	128	148	147	144	148	145	135	2067	n
+90	Ringstad	Hongvaeret	Late season	18	l	160	146	150	136	158	125	159	134	156	146	2067	n
+91	Ringstad	Hongvaeret	Late season	7	s	155	155	158	161	151	152	150	155	157	157	2067	y
+93	Arendal	St Helena	Late season	6	l	134	131	124	128	111	128	131	115	132	129	2065	y
+94	Arendal	St Helena	Late season	2	l	129	128	122	124	136	123	131	131	125	111	2065	n
+95	Arendal	St Helena	Late season	9	s	125	126	141	128	120	124	134	128	132	117	2065	y
+96	Arendal	St Helena	Late season	27	s	122	110	123	117	120	123	109	125	125	124	2065	n
+97	Arendal	St Helena	Late season	21	s	121	122	127	115	119	111	116	114	121	113	2065	n
+98	Arendal	St Helena	Late season	10	l	124	116	124	122	118	106	131	128	123	120	2065	y
+99	Arendal	St Helena	Late season	23	s	130	124	112	110	126	117	108	119	118	114	2065	n
+100	Arendal	St Helena	Late season	1	s	135	107	127	116	110	131	132	108	124	124	2065	n
+101	Arendal	St Helena	Late season	7	s	118	109	128	131	120	103	117	125	118	116	2065	n
+102	Arendal	St Helena	Late season	3	s	124	113	111	115	126	108	128	124	111	120	2065	y
+103	Arendal	St Helena	Late season	8	l	136	132	133	120	121	133	117	121	118	119	2065	y
+104	Arendal	Sven Johnsens	Late season	4	l	126	134	131	114	131	125	128	106	139	131	2065	n
+105	Arendal	Sven Johnsens	Late season	10	l	130	120	118	115	120	110	131	129	113	126	2065	n
+106	Arendal	Sven Johnsens	Late season	1	s	114	119	118	117	120	114	118	122	116	120	2065	y
+107	Arendal	Sven Johnsens	Late season	11	s	120	131	126	115	126	118	117	119	123	107	2065	n
+108	Arendal	Sven Johnsens	Late season	12	l	127	137	122	119	114	119	119	115	101	129	2065	n
+109	Arendal	Sven Johnsens	Late season	19	s	140	129	122	122	137	131	111	126	128	120	2065	y
+110	Arendal	Sven Johnsens	Late season	15	s	130	126	121	110	127	125	132	112	132	129	2065	y
+111	Arendal	Sven Johnsens	Late season	13	s	125	118	116	104	112	125	137	127	127	143	2065	n
+112	Arendal	Sven Johnsens	Late season	5	s	117	119	117	118	116	113	123	128	122	104	2065	n
+114	Austevoll	Tipatiskaeret	Late season	19	s	132	134	123	140	124	124	136	131	131	144	2065	y
+115	Austevoll	Tipatiskaeret	Late season	12	l	132	130	144	139	142	138	135	136	151	125	2065	y
+116	Austevoll	Tipatiskaeret	Late season	30	l	144	136	142	123	130	138	134	117	131	135	2065	n
+117	Austevoll	Tipatiskaeret	Late season	16	l	124	118	140	117	131	118	142	118	149	119	2065	n
+118	Austevoll	Tipatiskaeret	Late season	20	l	126	135	138	114	132	136	128	125	141	129	2065	n
+119	Austevoll	Lamoya	Late season	17	s	115	108	118	112	130	135	123	128	124	126	2065	n
+120	Austevoll	Lamoya	Late season	14	l	126	122	126	129	132	123	128	130	123	110	2065	n
+121	Austevoll	Lamoya	Late season	11	s	123	126	128	103	124	118	125	130	128	133	2065	n
+122	Austevoll	Krabbavika	Late season	5	s	138	141	143	138	116	120	143	143	124	119	2065	y
+123	Austevoll	Krabbavika	Late season	7	s	139	118	124	124	135	127	126	129	123	131	2065	y
+124	Austevoll	Krabbavika	Late season		l	134	134	126	128	139	137	144	118	135	125	2065	y
+125	Austevoll	Krabbavika	Late season	3	s	140	134	140	101	140	126	129	134	141	125	2065	n
+126	Austevoll	Krabbavika	Late season	22	l	108	115	117	108	116	115	123	113	110	113	2065	n
+127	Austevoll	Krabbavika	Late season	10	l	136	122	124	127	123	114	127	128	146	113	2065	y
+128	Austevoll	Krabbavika	Late season	9	s	137	133	137	127	130	116	138	137	127	132	2065	n
+129	Austevoll	Krabbavika	Late season	26	l	133	132	132	118	129	116	130	127	136	127	2065	n
+130	Austevoll	Krabbavika	Late season	21	s	127	133	137	124	133	126	125	143	144	137	2065	y
+131	Austevoll	Krabbavika	Late season	4	l	108	119	107	127	111	125	114	114	134	127	2065	n
+132	Helligvaer	Litj-sorroy	Late season	21	s	152	149	137	142	154	138	133	129	143	146	2065	n
+133	Helligvaer	Litj-sorroy	Late season	14	l	161	160	161	166	168	171	170	165	154	160	2065	y
+134	Helligvaer	Litj-sorroy	Late season	22	l	155	156	155	151	155	152	151	155	156	153	2065	y
+135	Helligvaer	Litj-sorroy	Late season	12	l	154	151	162	140	158	166	161	164	165	155	2065	y
+136	Helligvaer	Litj-sorroy	Late season	17	s	144	139	137	144	160	137	166	137	146	147	2065	n
+138	Helligvaer	Store-kvannoya	Late season	20	l	139	148	145	154	141	145	142	141	127	132	2065	n
+139	Helligvaer	Store-kvannoya	Late season	8	l	156	161	148	142	152	137	153	136	155	138	2065	y
+140	Helligvaer	Store-kvannoya	Late season	4	l	150	135	132	148	149	140	142	146	148	130	2065	n
+141	Helligvaer	Store-kvannoya	Late season	17	s	126	140	151	140	138	161	161	129	156	137	2065	y
+142	Helligvaer	Store-kvannoya	Late season	16	l	145	144	168	162	156	140	147	139	160	147	2065	n
+143	Helligvaer	Store-kvannoya	Late season	6	l	145	136	145	138	151	138	153	136	154	137	2065	n
+144	Helligvaer	Store-kvannoya	Late season	1	s	153	155	162	139	170	139	148	156	162	150	2065	y
+145	Helligvaer	Gudmunholmen	Late season	30	l	156	139	143	154	150	144	166	160	159	151	2065	y
+146	Helligvaer	Gudmunholmen	Late season	3	s	156	163	161	154	161	146	157	153	162	165	2065	y
+147	Helligvaer	Litj-sorroy	Peak season	29	s	160	151	147	143	149	140	151	144	162	133	2065	n
+148	Helligvaer	Litj-sorroy	Peak season	30	l	167	163	174	186	168	158	176	180	174	175	2065	y
+149	Helligvaer	Litj-sorroy	Peak season	28	l	163	153	163	136	156	149	167	132	144	152	2065	n
+150	Helligvaer	Litj-sorroy	Peak season	18	l	150	143	170	143	163	150	165	151	164	150	2065	n
+151	Helligvaer	Litj-sorroy	Peak season	11	s	158	170	165	179	176	147	151	163	174	139	2065	y
+152	Helligvaer	Litj-sorroy	Peak season	14	l	161	152	170	173	150	178	171	152	158	152	2065	n
+153	Helligvaer	Store-kvannoya	Peak season	10	l	151	142	169	144	148	146	147	168	173	150	2065	n
+154	Helligvaer	Store-kvannoya	Peak season	18	l	196	142	172	165	180	142	172	145	163	159	2065	y
+155	Helligvaer	Store-kvannoya	Peak season	12	l	152	139	171	162	165	122	171	157	147	177	2065	n
+156	Helligvaer	Store-kvannoya	Peak season	6	l	150	160	162	179	150	162	167	163	188	156	2065	n
+157	Helligvaer	Store-kvannoya	Peak season	8	l	175	150	147	171	167	169	168	166	141	129	2065	y
+158	Helligvaer	Store-kvannoya	Peak season	20	l	153	166	171	159	155	166	175	170	166	146	2065	n
+159	Helligvaer	Gudmunholmen	Peak season	29	s	130	125	152	159	154	160	128	165	139	156	2065	y
+160	Helligvaer	Gudmunholmen	Peak season	25	s	150	139	159	132	154	131	161	154	158	153	2065	n
+161	Helligvaer	Gudmunholmen	Peak season	24	l	162	142	154	151	154	161	182	154	166	161	2065	n
+162	Helligvaer	Gudmunholmen	Peak season	3	s	131	157	140	142	148	131	129	145	133	148	2065	y
+163	Helligvaer	Gudmunholmen	Peak season	23	s	146	147	170	168	164	139	172	148	160	158	2065	y
+164	Helligvaer	Gudmunholmen	Peak season	4	l	168	152	164	166	185	160	170	151	184	148	2065	y
+165	Austevoll	Krabbavika	Peak season	8	l	131	143	143	137	127	128	133	137	126	147	2065	y
+166	Austevoll	Krabbavika	Peak season	5	s	140	116	112	138	138	128	146	117	140	121	2065	n
+167	Austevoll	Krabbavika	Peak season	7	s	139	135	132	113	134	120	133	124	130	132	2065	y
+168	Austevoll	Krabbavika	Peak season	21	s	148	128	151	142	144	128	156	135	129	150	2065	y
+169	Austevoll	Krabbavika	Peak season		s	119	119	115	126	127	134	131	110	127	121	2065	n
+170	Austevoll	Krabbavika	Peak season	9	s	144	132	147	136	148	132	150	146	141	154	2065	n
+171	Austevoll	Krabbavika	Peak season	22	l	127	131	128	129	141	124	139	123	137	122	2065	y
+172	Austevoll	Krabbavika	Peak season	24	l	141	121	147	124	141	140	139	135	155	126	2065	n
+173	Austevoll	Lamoya	Peak season	20	l	150	131	150	130	151	128	148	136	141	134	2065	n
+174	Austevoll	Lamoya	Peak season	18	l	131	146	135	136	125	115	130	120	120	126	2065	y
+175	Austevoll	Tipatiskaeret	Peak season	24	l	139	144	137	141	133	126	121	123	133	142	2065	n
+176	Austevoll	Tipatiskaeret	Peak season	30	l	127	117	133	120	121	117	134	127	131	126	2065	n
+177	Austevoll	Tipatiskaeret	Peak season	12	l	128	135	138	127	142	130	134	135	141	128	2065	n
+178	Austevoll	Tipatiskaeret	Peak season	20	l	134	141	140	136	138	145	141	128	147	132	2065	n
+179	Arendal	St Helena	Peak season	2	l	137	131	142	131	138	134	129	132	138	135	2065	y
+181	Arendal	St Helena	Peak season	26	l	123	114	131	119	135	117	136	122	142	125	2065	n
+182	Arendal	St Helena	Peak season	29	s	121	132	115	111	126	138	121	119	127	126	2065	n
+183	Arendal	St Helena	Peak season	22	l	135	125	137	129	138	121	131	116	131	142	2065	n
+185	Arendal	Sven Johnsens	Peak season	1	s	119	140	115	130	128	128	135	121	141	117	2065	y
+186	Arendal	Sven Johnsens	Peak season	5	s	141	112	117	131	135	149	131	106	127	115	2065	n
+187	Arendal	Sven Johnsens	Peak season	15	s	130	117	133	118	133	119	135	128	123	121	2065	n
+188	Arendal	Sven Johnsens	Peak season	7	s	126	125	147	137	137	138	135	130	143	129	2065	y
+189	Arendal	Sven Johnsens	Peak season	18	l	140	143	135	118	139	124	141	132	147	118	2065	n
+190	Arendal	Sven Johnsens	Peak season	20	l	151	142	143	123	140	123	136	136	145	138	2065	n
+191	Arendal	Sven Johnsens	Peak season	12	l	130	130	126	122	112	116	141	126	148	121	2065	n
+192	Arendal	Sven Johnsens	Peak season	14	l	133	134	137	135	137	131	131	115	129	119	2065	n
+193	Arendal	Sven Johnsens	Peak season	3	s	129	134	124	120	133	117	110	123	121	117	2065	n
+194	Arendal	Sven Johnsens	Peak season	13	s	135	127	128	141	128	135	142	133	149	122	2065	n
+195	Arendal	Sven Johnsens	Peak season	8	l	139	149	126	141	121	122	143	136	128	143	2065	n
