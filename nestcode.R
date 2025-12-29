@@ -726,7 +726,7 @@ ggarrange(Envz,ddfz, common.legend = T, legend = "right")
 ggsave("figures/Figure2.pdf", width=11, height=4.5)
 
 ## Figure 3 ----
-#Nest occupancy figure to begin with.
+#Nest occupancy figure.
 #&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 nestsamp<-as.data.frame(table(nestdat$area, nestdat$Timeseason))
 colnames(nestsamp)<-c("area","Timeseason","N")
