@@ -29,14 +29,15 @@ library(corrplot)
 #library(zoib)
 library(MuMIn)
 library(glmmTMB)
+library(performace)
 
 #install.packages(c("StanHeaders", "rstan"))
 #install.packages("cmdstanr")
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 library(usethis)
-edit_git_config()
-edit_git_ignore()
-use_git()
+#edit_git_config()
+#edit_git_ignore()
+#use_git()
 
 #&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 # 1. Nest data import and format ----
@@ -316,15 +317,20 @@ corrplot(cor(nestcor[nestcor$Timeseason=="Late season",c(3:9)], use="complete.ob
 ## DATA FORMATTING----------------------------------------------------------------------------------
 #__---__---__---__---__---__---__---__---__---__---__---__---__---__---__---__---__---__---__---__---
 
-# A. Create a scaled version of the variables that will be decomposed
+### A. Create a scaled version of the variables that will be decomposed ----
 #&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 nestanalysis$length_sc<-scale(nestanalysis$length)
 nestanalysis$con_sc<-scale(nestanalysis$con_all)
-# It does not make sense to scale the Cannibalism and Overgrowth as they are true proportions. I think
+nestanalysis$Cann_sc<-scale(nestanalysis$PropCann)
+nestanalysis$Grow_sc<-scale(nestanalysis$PropGrown)
+
+hist(scale(nestanalysis$PropGrown))
 hist(nestanalysis$con_sc)
 
-# B. Decompose the variables that have both across and within population effects
+### B. Decompose the variables that have both across and within population effects ----
 #&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+#### TL ----
 #First I need to format the data to add the mean per population of the variables of interest. Let's start with length 
 poplengthz<-as.data.frame(tapply(nestanalysis$length, list(area=nestanalysis$area, Timepoint=nestanalysis$Timepoint), mean, na.rm=T))
 nestanalysis$poplength<-NA
@@ -344,10 +350,12 @@ nestanalysis$withlength_sc<-nestanalysis$length_sc-nestanalysis$poplength_sc
 ggplot(nestanalysis,aes(x=area:factor(Timepoint),y=withlength_sc))+geom_point(position=position_jitter()) #sanity check
 
 #Does it matter if we scale before or after decomposition?
+ggplot(nestanalysis,aes(x=scale(poplength), y=poplength_sc))+geom_point()
 ggplot(nestanalysis,aes(x=scale(withlength), y=withlength_sc))+geom_point()
 hist(scale(nestanalysis$withlength))
-#Nope
+#Yes, the scale is not the same. Need to scale first then partition.
 
+#### Condition----
 #now male condition
 popconz<-as.data.frame(tapply(nestanalysis$con_all, list(area=nestanalysis$area, Timepoint=nestanalysis$Timepoint), mean, na.rm=T))
 popconz
@@ -358,7 +366,18 @@ ggplot(nestanalysis,aes(x=area:factor(Timepoint),y=popcon))+geom_point(position=
 nestanalysis$withcon<-nestanalysis$con_all-nestanalysis$popcon
 ggplot(nestanalysis,aes(x=area:factor(Timepoint),y=withcon))+geom_point(aes(color=Nest_size),position=position_jitter()) #sanity check
 
-#cannibalism
+#Scaled version of condition
+popconz_sc<-as.data.frame(tapply(nestanalysis$con_sc, list(area=nestanalysis$area, Timepoint=nestanalysis$Timepoint), mean, na.rm=T))
+nestanalysis$popcon_sc<-NA
+for (i in levels(nestanalysis$area)) {for (j in (2:3)) {nestanalysis[nestanalysis$area==i & nestanalysis$Timepoint==j,]$popcon_sc<-popconz_sc[i,as.character(j)]}}
+ggplot(nestanalysis,aes(x=area:factor(Timepoint),y=popcon_sc))+geom_point(position=position_jitter()) #sanity check
+#then I had one column for the within population deviation from the mean
+nestanalysis$withcon_sc<-nestanalysis$con_sc-nestanalysis$popcon_sc
+ggplot(nestanalysis,aes(x=area:factor(Timepoint),y=withcon_sc))+geom_point(position=position_jitter()) #sanity check
+
+
+
+#### Cannibalism ----
 popCanz<-as.data.frame(tapply(nestanalysis$PropCann, list(area=nestanalysis$area, Timepoint=nestanalysis$Timepoint), mean, na.rm=T))
 popCanz
 nestanalysis$popCan<-NA
@@ -368,7 +387,17 @@ ggplot(nestanalysis,aes(x=area:factor(Timepoint),y=popCan))+geom_point(position=
 nestanalysis$withCan<-nestanalysis$PropCann-nestanalysis$popCan
 ggplot(nestanalysis,aes(x=area:factor(Timepoint),y=withCan))+geom_point(aes(color=Nest_size),position=position_jitter()) #sanity check
 
-#overgrowth
+#Scaled version of cannibalism
+popCanz_sc<-as.data.frame(tapply(nestanalysis$Cann_sc, list(area=nestanalysis$area, Timepoint=nestanalysis$Timepoint), mean, na.rm=T))
+nestanalysis$popCan_sc<-NA
+for (i in levels(nestanalysis$area)) {for (j in (2:3)) {nestanalysis[nestanalysis$area==i & nestanalysis$Timepoint==j,]$popCan_sc<-popCanz_sc[i,as.character(j)]}}
+ggplot(nestanalysis,aes(x=area:factor(Timepoint),y=popCan_sc))+geom_point(position=position_jitter()) #sanity check
+#then I had one column for the within population deviation from the mean
+nestanalysis$withCan_sc<-nestanalysis$Cann_sc-nestanalysis$popCan_sc
+ggplot(nestanalysis,aes(x=area:factor(Timepoint),y=withCan_sc))+geom_point(position=position_jitter()) #sanity check
+
+
+#### Overgrowth ----
 popGroz<-as.data.frame(tapply(nestanalysis$PropGrown, list(area=nestanalysis$area, Timepoint=nestanalysis$Timepoint), mean, na.rm=T))
 popGroz
 nestanalysis$popGro<-NA
@@ -378,7 +407,17 @@ ggplot(nestanalysis,aes(x=area:factor(Timepoint),y=popGro))+geom_point(position=
 nestanalysis$withGro<-nestanalysis$PropGrown-nestanalysis$popGro
 ggplot(nestanalysis,aes(x=area:factor(Timepoint),y=withGro))+geom_point(aes(color=Nest_size),position=position_jitter()) #sanity check
 
-#Overgrwoth with offset 
+#Scaled version of overgowth
+popGroz_sc<-as.data.frame(tapply(nestanalysis$Grow_sc, list(area=nestanalysis$area, Timepoint=nestanalysis$Timepoint), mean, na.rm=T))
+nestanalysis$popGro_sc<-NA
+for (i in levels(nestanalysis$area)) {for (j in (2:3)) {nestanalysis[nestanalysis$area==i & nestanalysis$Timepoint==j,]$popGro_sc<-popGroz_sc[i,as.character(j)]}}
+ggplot(nestanalysis,aes(x=area:factor(Timepoint),y=popGro_sc))+geom_point(position=position_jitter()) #sanity check
+#then I had one column for the within population deviation from the mean
+nestanalysis$withGro_sc<-nestanalysis$Grow_sc-nestanalysis$popGro_sc
+ggplot(nestanalysis,aes(x=area:factor(Timepoint),y=withGro_sc))+geom_point(position=position_jitter()) #sanity check
+
+
+#### Overgrwoth with offset ----
 nestanalysis$PropGoff<-(nestanalysis$PropGrown*196+0.5)/197
 popGrofz<-as.data.frame(tapply(nestanalysis$PropGoff, list(area=nestanalysis$area, Timepoint=nestanalysis$Timepoint), mean, na.rm=T))
 popGrofz
@@ -388,6 +427,8 @@ ggplot(nestanalysis,aes(x=area:factor(Timepoint),y=popGroff))+geom_point(positio
 #then I had one column for the within population deviation from the mean
 nestanalysis$withGroff<-nestanalysis$PropGoff-nestanalysis$popGroff
 ggplot(nestanalysis,aes(x=area:factor(Timepoint),y=withGroff))+geom_point(aes(color=Nest_size),position=position_jitter()) #sanity check
+
+#offset only necessary when overgrowth is the response variable. no scaled version needed there.
 
 
 ## STATISTICAL MODELS-----------------------
@@ -401,27 +442,38 @@ ggplot(nestanalysis,aes(x=area:factor(Timepoint),y=withGroff))+geom_point(aes(co
 ###Model 1: Reproductive success explained by EVRYTHING ----------------- or almost everything (collinearuty issues) ----
 #scale variables to get meaningful effect sizes
 hist(nestanalysis$Eggs)
-momod1.2<-lmer(scale(Eggs)~scale(DDF)+scale(poplength)+scale(popcon)+popCan+popGro+relevel(Nest_size, ref="Small nest")+scale(withlength)+scale(withcon)+withCan+withGro+(1|location), data=nestanalysis[nestanalysis$Timeseason=="Peak season",])
+hist(scale(nestanalysis$Eggs))
+hist(scale(poplength))
+
+#Use the already scaled and decomposed variables. It is incorrect to decompose first.
+#I propose to keep Eggs as non scale, in egg unit.
+colnames(nestanalysis)
+str(nestanalysis)
+
+momod1.2<-lmer(scale(Eggs)~scale(DDF)+poplength_sc+popcon_sc+popCan_sc+popGro_sc+relevel(Nest_size, ref="Small nest")+
+                 withlength_sc+withcon_sc+withCan_sc+withGro_sc+(1|location),
+               data=nestanalysis[nestanalysis$Timeseason=="Peak season",])
 vif(momod1.2, type="predictor")
 summary(momod1.2)
 Anova(momod1.2, type=2)
 #dropping pop level condition because of collinearity with DDF
-momod1.2.2<-lmer(scale(Eggs)~scale(DDF)+scale(poplength)+popCan+popGro+Nest_size+scale(withlength)+scale(withcon)+withCan+withGro+(1|location), data=nestanalysis[nestanalysis$Timeseason=="Peak season",])
+momod1.2.2<-lmer((Eggs)~scale(DDF)+poplength_sc+popCan_sc+popGro_sc+Nest_size+
+                   #relevel(Nest_size, ref="Small nest")+
+                   withlength_sc+withcon_sc+withCan_sc+withGro_sc+(1|location),
+                 data=nestanalysis[nestanalysis$Timeseason=="Peak season",])
 vif(momod1.2.2, type="predictor")
 #now we have an acceptable model (outcome is unchanged since neither DDF or condition affected RS
 summary(momod1.2.2)
 Anova(momod1.2.2, type=2)
 
 #visualise significant effects to make sure I interpret effect sizes properly
-plot(effect("withCan",momod1.2.2))
-plot(effect("withlength",momod1.2.2))
+plot(effect("withCan_sc",momod1.2.2))
+plot(effect("withlength_sc",momod1.2.2))
 plot(effect("Nest_size",momod1.2.2))
+
 #Adjusted R square
 r.squaredGLMM(momod1.2.2) #very similar R squared value to the model without random effect here
-#I find the effect size of cannibalism on RS a bit strong. Could be due to outliers driving the stuff
-ggplot(nestanalysis, aes(x=withCan, y= Eggs))+geom_point()+facet_wrap(~Nest_size:Timeseason)
-#Ok looks legit, remember this is within pop. What is driving cannibalism within pop? not known
-
+11670-5956
 
 ###Model 2: Cannibalism is the response---------------------------------------------
 #Problem: how to handle these percentage (true proportion ) data?
@@ -436,24 +488,29 @@ ggplot (nestmale, aes(x=PropCann))+geom_histogram(binwidth=0.005)+labs(x="Propor
 #data transformation that is sort of not sneered upon by statisticians
 length(nestanalysis[!is.na(nestanalysis$PropCann),]$PropGrown)
 nestanalysis$PropCaoff<-(nestanalysis$PropCann*193+0.5)/194
-beta2 <- betareg(PropCaoff~scale(DDF)+scale(poplength)+scale(popcon)+Nest_size+scale(withlength)+scale(withcon), data = nestanalysis[nestanalysis$Timeseason=="Peak season",])
+beta2 <- betareg(PropCaoff~scale(DDF)+poplength_sc+popcon_sc+Nest_size+
+                   withlength_sc+withcon_sc, data = nestanalysis[nestanalysis$Timeseason=="Peak season",])
 #for cannibalism, there are very few zeroes and when can question whether they are true zeroes so I am happy with the offset betareg except that it lacks random structure
 vif(beta2, type="predictor") #as usual remove condition at the pop level as it is collinear to DDF
-beta2.2 <- betareg(PropCaoff~scale(DDF)+scale(poplength)+Nest_size+scale(withlength)+scale(withcon), data = nestanalysis[nestanalysis$Timeseason=="Peak season",])
+beta2.2 <- betareg(PropCaoff~scale(DDF)+poplength_sc+Nest_size+
+                     withlength_sc+withcon_sc, data = nestanalysis[nestanalysis$Timeseason=="Peak season",])
 vif(beta2.2, type="predictor") #NOICE
 Anova(beta2.2, type=2)
 summary(beta2.2)
 
 #What about glmmTMB? still with offset data but includes the random effect
-Tmbeta3<-glmmTMB(PropCaoff~scale(DDF)+scale(poplength)+Nest_size+scale(withlength)+scale(withcon)+(1|location), 
+Tmbeta3<-glmmTMB(PropCaoff~scale(DDF)+poplength_sc+Nest_size+
+                   withlength_sc+withcon_sc+(1|location), 
                  data = nestanalysis[nestanalysis$Timeseason=="Peak season",],
                  family = beta_family(link = "logit") )
 summary(Tmbeta3)
 Anova(Tmbeta3)
+r.squaredGLMM(Tmbeta3) #
 
 
 #use a linear model to calculate effect size to report on the path diagram
-momod2<-lmer((PropCann)~scale(DDF)+scale(poplength)+Nest_size+scale(withlength)+scale(withcon)+(1|area), data=nestanalysis[nestanalysis$Timeseason=="Peak season",])
+momod2<-lmer(scale(PropCann)~scale(DDF)+poplength_sc+Nest_size+
+               withlength_sc+withcon_sc+(1|area), data=nestanalysis[nestanalysis$Timeseason=="Peak season",])
 #Boundary fit warning: random effects are very small but the model converged. Use area instead of location!
 summary(momod2)
 plot(effect("DDF",momod2))
@@ -488,14 +545,16 @@ table(nestanalysis$GrownBin)
 #visual check
 ggplot(nestanalysis[!is.na(nestanalysis$GrownBin),],aes(x=area, fill=GrownBin))+geom_bar()
 #2. run the binomial model
-hurdlbin2<-glmer(factor(GrownBin)~scale(DDF)+scale(poplength)+relevel(Nest_size, ref="Small nest")+scale(withlength)+scale(withcon)+(1|location), 
+hurdlbin2<-glmer(factor(GrownBin)~scale(DDF)+poplength_sc+relevel(Nest_size, ref="Small nest")+
+                   withlength_sc+withcon_sc+(1|location), 
                  data = nestanalysis[nestanalysis$Timeseason=="Peak season",],
                  family=binomial(link = "logit"))
 summary(hurdlbin2)
 Anova(hurdlbin2)
 
 #betareg for strictly positive values
-Tmbeta1.2<-glmmTMB(PropGoff~scale(DDF)+scale(poplength)+relevel(Nest_size, ref="Small nest")+scale(withlength)+scale(withcon)+(1|location), 
+Tmbeta1.2<-glmmTMB(PropGoff~scale(DDF)+poplength_sc+relevel(Nest_size, ref="Small nest")+
+                     withlength_sc+withcon_sc+(1|location), 
                    data = nestanalysis[nestanalysis$Timeseason=="Peak season" & nestanalysis$GrownBin=="y",],
                    family = beta_family(link = "logit") )
 summary(Tmbeta1.2)
@@ -504,7 +563,8 @@ Anova(Tmbeta1.2)
 # DDF and nest size affect how much growth there is. Not Huge difference from the simple offset model. But cool :)
 
 #lm for effect sizes
-momod3<-lmer(PropGrown~scale(DDF)+scale(poplength)+Nest_size+scale(withlength)+scale(withcon)+(1|location), data=nestanalysis[nestanalysis$Timeseason=="Peak season",])
+momod3<-lmer(Grow_sc~scale(DDF)+poplength_sc+Nest_size+
+               withlength_sc+withcon_sc+(1|location), data=nestanalysis[nestanalysis$Timeseason=="Peak season",])
 summary(momod3)
 Anova(momod3)
 plot(effect("DDF",momod3))
@@ -516,25 +576,43 @@ plot(effect("scale(poplength)",momod3))
 
 
 ###model 4: Nest size is the response ----
-momod4<-glmer(family=binomial(link = "logit"),relevel(Nest_size, ref="Small nest")~scale(poplength)+scale(popcon)+scale(withlength)+scale(withcon)+(1|area), data=nestanalysis[nestanalysis$Timeseason=="Peak season",])
+momod4<-glmer(family=binomial(link = "logit"),
+              relevel(Nest_size, ref="Small nest")~poplength_sc+popcon_sc+
+                withlength_sc+withcon_sc+(1|area),
+              data=nestanalysis[nestanalysis$Timeseason=="Peak season",])
 #singular fit? estimation of random effect failed. Compare to non mixed model?
 vif(momod4, type="predictor") #no problem
 summary(momod4)
 Anova(momod4)
 r.squaredGLMM(momod4)
 
-momod4.2<-glm(family=binomial(link = "logit"),relevel(Nest_size, ref="Small nest")~scale(poplength)+scale(popcon)+scale(withlength)+scale(withcon), data=nestanalysis[nestanalysis$Timeseason=="Peak season",])
+momod4.2<-glm(family=binomial(link = "logit"),
+              relevel(Nest_size, ref="Small nest")~poplength_sc+popcon_sc+
+                withlength_sc+withcon_sc, data=nestanalysis[nestanalysis$Timeseason=="Peak season",])
 #singular fit? estimation of random effect failed. Compare to non mixed model?
 summary(momod4.2)
 Anova(momod4.2)
 r.squaredGLMM(momod4.2)
 #how to explain the effect sizes with binomial model?
-plot(effect("scale(withlength)",momod4.2))
+plot(effect("withlength_sc",momod4.2))
 plot(momod4.2$fitted.values~(nestanalysis[nestanalysis$Timeseason=="Peak season" & !is.na(nestanalysis$withlength),]$withlength))
-
+sd(nestanalysis[which(nestanalysis$Timeseason=="Peak season"),]$withlength, na.rm=T)
+sd(nestanalysis[which(nestanalysis$Timeseason=="Late season"),]$withlength, na.rm=T)
 plot(momod4.2$fitted.values/(1-momod4.2$fitted.values)~nestanalysis[nestanalysis$Timeseason=="Peak season" & !is.na(nestanalysis$withlength),]$withlength)
 
 plot(momod4.2$fitted.values~(nestanalysis[nestanalysis$Timeseason=="Peak season" & !is.na(nestanalysis$withlength),]$withcon))
+# convert the logit estimate back into an effect size in probability.
+exp(1.3)
+exp(0.69)
+exp(0.1380)/(1+exp(0.1380))
+exp(0.1380+1.3025)/(1+exp(0.1380+1.3025))
+
+#odds ratios
+exp(0.1380)/(1+exp(0.1380))/(1-exp(0.1380)/(1+exp(0.1380)))
+exp(0.1380+1.3025)/(1+exp(0.1380+1.3025))/(1-exp(0.1380+1.3025)/(1+exp(0.1380+1.3025)))
+
+#relative odds ratios
+ (exp(0.1380+1.3025)/(1+exp(0.1380+1.3025))/(1-exp(0.1380+1.3025)/(1+exp(0.1380+1.3025)))) / (exp(0.1380)/(1+exp(0.1380))/(1-exp(0.1380)/(1+exp(0.1380)))) 
 
 
 ###model 5: DDF on Length ----
@@ -555,25 +633,25 @@ r.squaredGLMM(momod6)
 
 ###Model 1: Reproductive success explained by EVRYTHING ----------------- or almost everything (collinearuty issues)----
 ###scale variables to get meaningful effect sizes
-momod1.2<-lmer(scale(Eggs)~scale(DDF)+scale(poplength)+scale(popcon)+popCan+popGro+relevel(Nest_size, ref="Small nest")+scale(withlength)+scale(withcon)+withCan+withGro+(1|location), data=nestanalysis[nestanalysis$Timeseason=="Late season",])
+momod1.2<-lmer(scale(Eggs)~scale(DDF)+poplength_sc+popcon_sc+popCan_sc+popGro_sc+Nest_size+
+                 withlength_sc+withcon_sc+withCan_sc+withGro_sc+(1|location), 
+               data=nestanalysis[nestanalysis$Timeseason=="Late season",])
 vif(momod1.2, type="predictor")
 #This time we have a problem with population level growth we might have to drop it. Collinear with what? probably DDF or nest size
-momod1.2.2<-lmer(scale(Eggs)~scale(DDF)+scale(poplength)+scale(popcon)+popCan+Nest_size+scale(withlength)+scale(withcon)+withCan+withGro+(1|location), data=nestanalysis[nestanalysis$Timeseason=="Late season",])
+momod1.2.2<-lmer(scale(Eggs)~scale(DDF)+poplength_sc+popcon_sc+popCan_sc+Nest_size+
+                   withlength_sc+withcon_sc+withCan_sc+withGro_sc+(1|location), 
+                 data=nestanalysis[nestanalysis$Timeseason=="Late season",])
 vif(momod1.2.2, type="predictor")
 #acceptable
 summary(momod1.2.2)
 Anova(momod1.2.2, type=2)
-
+10043-5164
 #visualise significant effects to make sure I interpret effect sizes properly
 plot(effect("withCan",momod1.2.2))
 plot(effect("withlength",momod1.2.2))
 plot(effect("Nest_size",momod1.2.2))
 #Adjusted R square
 r.squaredGLMM(momod1.2.2) #very similar R squared value to the model without random effect here
-#I find the effect size of cannibalism on RS a bit strong. Could be due to outliers driving the stuff
-ggplot(nestanalysis, aes(x=withCan, y= Eggs))+geom_point()+facet_wrap(~Nest_size:Timeseason)
-#Ok looks legit, remember this is within pop. What is driving cannibalism within pop? not known
-
 
 ###Model 2: Cannibalism is the response---------------------------------------------
 #Problem: how to handle these percentage (true proportion ) data?
@@ -588,22 +666,26 @@ ggplot (nestmale, aes(x=PropCann))+geom_histogram(binwidth=0.005)+labs(x="Propor
 #data transformation that is sort of not sneered upon by statisticians
 length(nestanalysis[!is.na(nestanalysis$PropCann),]$PropGrown)
 nestanalysis$PropCaoff<-(nestanalysis$PropCann*193+0.5)/194
-beta2 <- betareg(PropCaoff~scale(DDF)+scale(poplength)+scale(popcon)+Nest_size+scale(withlength)+scale(withcon), data = nestanalysis[nestanalysis$Timeseason=="Late season",])
+beta2 <- betareg(PropCaoff~scale(DDF)+poplength_sc+popcon_sc+Nest_size+
+                   withlength_sc+withcon_sc,
+                 data = nestanalysis[nestanalysis$Timeseason=="Late season",])
 #for cannibalism, there are very few zeroes and when can question whether they are true zeroes so I am happy with the offset betareg except that it lacks random structure
 vif(beta2, type="predictor") #it's fine
 Anova(beta2, type=2)
 summary(beta2)
 
 #What about glmmTMB? still with offset data but includes the random effect
-Tmbeta3<-glmmTMB(PropCaoff~scale(DDF)+scale(poplength)+scale(popcon)+Nest_size+scale(withlength)+scale(withcon)+(1|location), 
+Tmbeta3<-glmmTMB(PropCaoff~scale(DDF)+poplength_sc+popcon_sc+Nest_size+
+                   withlength_sc+withcon_sc+(1|location), 
                  data = nestanalysis[nestanalysis$Timeseason=="Late season",],
                  family = beta_family(link = "logit") )
 summary(Tmbeta3)
 Anova(Tmbeta3)
-
+r.squaredGLMM(Tmbeta3) #
 
 #use a linear model to calculate effect size to report on the path diagram
-momod2<-lmer((PropCann)~scale(DDF)+scale(poplength)+scale(popcon)+Nest_size+scale(withlength)+scale(withcon)+(1|area), data=nestanalysis[nestanalysis$Timeseason=="Late season",])
+momod2<-lmer(scale(PropCann)~scale(DDF)+poplength_sc+popcon_sc+Nest_size+
+               withlength_sc+withcon_sc+(1|area), data=nestanalysis[nestanalysis$Timeseason=="Late season",])
 #Boundary fit warning: random effects are very small but the model converged. Use area instead of location!
 summary(momod2)
 plot(effect("DDF",momod2))
@@ -646,38 +728,42 @@ table(nestanalysis$GrownBin)
 ggplot(nestanalysis[!is.na(nestanalysis$GrownBin),],aes(x=area, fill=GrownBin))+geom_bar()
 
 #2. run the binomial model
-hurdlbin<-glmer(factor(GrownBin)~scale(DDF)+scale(poplength)+scale(popcon)+relevel(Nest_size, ref="Small nest")+scale(withlength)+scale(withcon)+(1|location), 
+hurdlbin<-glmer(factor(GrownBin)~scale(DDF)+poplength_sc+popcon_sc+Nest_size+
+                  withlength_sc+withcon_sc+(1|location), 
                 data = nestanalysis[nestanalysis$Timeseason=="Late season",],
                 family=binomial(link = "logit"))
 summary(hurdlbin)
 Anova(hurdlbin)
 # relative male lengths affects if there is growth or not
 #betareg for strictly positive values
-Tmbeta2.2<-glmmTMB(PropGoff~scale(DDF)+scale(poplength)+scale(popcon)+relevel(Nest_size, ref="Small nest")+scale(withlength)+scale(withcon)+(1|location), 
+Tmbeta2.2<-glmmTMB(PropGoff~scale(DDF)+poplength_sc+popcon_sc+Nest_size+
+                     withlength_sc+withcon_sc+(1|location), 
                  data = nestanalysis[nestanalysis$Timeseason=="Late season" & nestanalysis$GrownBin=="y",],
                  family = beta_family(link = "logit") )
 summary(Tmbeta2.2)
-Anova(Tmbeta2)
+Anova(Tmbeta2.2)
 
 # DDF and nest size affect how much growth there is. Not Huge difference from the simple offset model. But cool :)
 
-momod3<-lmer(PropGrown~scale(DDF)+scale(poplength)+scale(popcon)+relevel(Nest_size, ref="Small nest")+scale(withlength)+scale(withcon)+(1|area), data=nestanalysis[nestanalysis$Timeseason=="Late season",])
+momod3<-lmer(scale(PropGrown)~scale(DDF)+poplength_sc+popcon_sc+Nest_size+
+               withlength_sc+withcon_sc+(1|area), data=nestanalysis[nestanalysis$Timeseason=="Late season",])
 summary(momod3)
 Anova(momod3)
 plot(effect("DDF",momod3))
 plot(effect("Nest_size",momod3))
 plot(effect("scale(poplength)",momod3))
-
+r.squaredGLMM(momod3) #
 
 
 ###model 4: Nest size is the response ----
-momod4<-glmer(family=binomial(link = "logit"),relevel(Nest_size, ref="Small nest")~scale(poplength)+scale(popcon)+scale(withlength)+scale(withcon)+(1|area), data=nestanalysis[nestanalysis$Timeseason=="Late season",])
+momod4<-glmer(family=binomial(link = "logit"),relevel(Nest_size, ref="Small nest")~poplength_sc+popcon_sc+withlength_sc+withcon_sc+(1|area),
+              data=nestanalysis[nestanalysis$Timeseason=="Late season",])
 #singular fit? estimation of random effect failed. Compare to non mixed model?
 vif(momod4, type="predictor") #no problem
 summary(momod4)
 Anova(momod4)
 r.squaredGLMM(momod4)
-
+exp(1.01)
 
 ###model 5: DDF on Length ----
 momod5<-lmer(scale(length)~scale(DDF)+(1|location),data=nestmale[nestmale$Timeseason=="Late season",] )
@@ -763,6 +849,8 @@ ggsave("figures/Figure3.pdf", width=11, height=4.5)
 modoccup1<-glmer(data=nestdat, Live_eggs_analysis~scale(DDF)+Timeseason+Nest_size+(1|location), family="binomial")
 summary(modoccup1)
 Anova(modoccup1, type=2)
+r.squaredGLMM(modoccup1)
+heplots::etasq(modoccup1)
 #translate logit into human language
 #intercept (peak season)
 exp(0.297596)/(1+exp(0.297596))
@@ -785,6 +873,15 @@ fittime[20,1]-fittime[1,1]
 fittime[20,2]-fittime[1,2] # increase of probability to occupy nest
 (fittime[20,2]-fittime[1,2])/fittime[1,2]
 minidat
+
+# Is the DDF effect on occupancy driven by Kberg T2?
+modoccup2<-glmer(data=nestdat[which(!(nestdat$area=="Kristineberg" & nestdat$Timepoint==2)),],
+                 Live_eggs_analysis~scale(DDF)+Timeseason+Nest_size+(1|location), family="binomial")
+summary(modoccup2)
+Anova(modoccup2, type=2)
+r.squaredGLMM(modoccup2)
+heplots::etasq(modoccup1)
+
 
 ## Effect cannibalism on RS // Suppl figure X ----
 #&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
